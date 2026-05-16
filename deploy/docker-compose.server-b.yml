@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  worker-grpc:
+    build: 
+      context: ../worker-python
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    env_file:
+      - ../worker-python/.env.prod
+    command: ["python", "main.py"]
+    restart: always
+
+  worker-celery:
+    build: 
+      context: ../worker-python
+      dockerfile: Dockerfile
+    env_file:
+      - ../worker-python/.env.prod
+    command: ["celery", "-A", "celery_app", "worker", "--loglevel=info"]
+    restart: always

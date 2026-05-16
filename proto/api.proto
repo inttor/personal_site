@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package api;
+option go_package = "github.com/yourname/PersonalSite/server-go/internal/pb";
+
+service AIService {
+  // 提交一个大模型/数据处理任务
+  rpc SubmitTask (TaskRequest) returns (TaskResponse);
+}
+
+message TaskRequest {
+  string prompt = 1;
+  string task_type = 2; // e.g. "article_generation", "data_analysis"
+}
+
+message TaskResponse {
+  int32 status = 1;
+  string message = 2;
+  string result_data = 3;
+}
