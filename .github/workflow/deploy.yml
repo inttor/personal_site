@@ -1,0 +1,28 @@
+# 1. 给这个自动化任务起个名字（随便写，方便看）
+name: Auto Deploy Docker
+
+# 2. 触发条件：什么时候执行机器人？
+on:
+  push:
+    branches: [ master ]  # 只有你把代码推送到 main 分支，才自动部署
+
+# 3. 任务核心：要做什么事
+jobs:
+  deploy:  # 任务名字：部署
+    runs-on: ubuntu-latest  # 机器人用Ubuntu系统运行（免费的）
+    steps:
+      - name: 更新镜像 # 步骤名字
+        uses: appleboy/ssh-action@master  # 官方工具：帮机器人SSH登录服务器
+        
+        # 4. 登录服务器的信息（机器人的登录账号）
+        with:
+          host: 你的服务器IP        # 服务器地址
+          username: root            # 服务器用户名（你平时登录用的）
+          key: ${{ secrets.HUOSHANYUN }}  # 机器人的钥匙（从GitHub密钥里取）
+          
+          # 5. 核心！机器人在服务器上执行的命令（就是你原来手动敲的命令！）
+          script: |
+            cd /home/personal_site/personal_site      # 1. 进入项目文件夹（你手动cd的路径）
+            git pull                # 2. 拉最新代码（你手动git pull）
+            cd ./deploy
+            docker compose -f docker-compose.server-a.yml up -d --build
