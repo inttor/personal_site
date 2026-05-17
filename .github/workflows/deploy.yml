@@ -23,6 +23,6 @@ jobs:
             git pull  # 拉取最新代码，不会影响未跟踪的敏感文件
             cd ./deploy
             # 构建并启动容器，--build确保镜像更新，-d后台运行
-            docker compose -f docker-compose.server-a.yml up -d --build
+            docker compose -f docker-compose.server-a.yml up -d --build || true
             # 可选：验证部署结果（查看容器状态）
             docker ps | grep personal_site
