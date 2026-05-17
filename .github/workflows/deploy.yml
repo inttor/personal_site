@@ -19,7 +19,7 @@ jobs:
           connect_timeout: 60s  # 🔥 增加超时时间，避免网络波动失败
           script: |
             set -e  # 🔥 关键！任何命令失败立即退出，防止错误继续执行
-            cd /home/personal_site/personal_site
+            cd ~/personal_site/personal_site
             git stash  # 🔥 保护本地敏感文件（.env等），防止冲突
             git pull  # 拉取最新代码，不会影响未跟踪的敏感文件
             cd ./deploy
