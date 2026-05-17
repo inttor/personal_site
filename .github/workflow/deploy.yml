@@ -13,10 +13,10 @@ jobs:
       - name: SSH部署到火山云服务器
         uses: appleboy/ssh-action@master  # 官方SSH工具，稳定可靠
         with:
-          host: ${{ secrets.SERVER_HOST }}  # 🔥 建议用统一命名，更清晰
-          username: ${{ secrets.SERVER_USER }}  # 🔥 敏感信息全部用secrets，不要硬编码
+          host: 118.196.93.240  # 🔥 建议用统一命名，更清晰
+          username: root  # 🔥 敏感信息全部用secrets，不要硬编码
           key: ${{ secrets.HUOSHANYUN }}  # 服务器SSH私钥，已正确配置
-          connect_timeout: 30s  # 🔥 增加超时时间，避免网络波动失败
+          connect_timeout: 60s  # 🔥 增加超时时间，避免网络波动失败
           script: |
             set -e  # 🔥 关键！任何命令失败立即退出，防止错误继续执行
             cd /home/personal_site/personal_site
