@@ -18,11 +18,11 @@
       <router-view></router-view>
     </main>
 
-    <footer class="w-full text-center py-6 text-sm text-zinc-500">
+    <!-- <footer class="w-full text-center py-6 text-sm text-zinc-500">
       <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 transition-colors">
         粤ICP备2023073336号-1
       </a>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
