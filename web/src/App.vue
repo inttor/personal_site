@@ -17,6 +17,12 @@
     <main class="flex-grow w-full max-w-5xl mx-auto px-6 pb-24">
       <router-view></router-view>
     </main>
+
+    <footer class="w-full text-center py-6 text-sm text-zinc-500">
+      <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 transition-colors">
+        粤ICP备2023073336号-1
+      </a>
+    </footer>
   </div>
 </template>
 
