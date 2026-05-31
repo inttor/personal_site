@@ -4,7 +4,7 @@
 
   <!-- Public site layout -->
   <div v-else class="min-h-screen bg-stone-50 dark:bg-stone-950 text-stone-700 dark:text-stone-300 font-sans flex flex-col transition-colors duration-500 grain-overlay" :style="{ backgroundImage: `url(${TEXTURE_DOTS})` }">
-    <header class="w-full max-w-3xl mx-auto px-6 pt-16 pb-10 flex items-end justify-between">
+    <header class="w-full max-w-5xl mx-auto px-6 pt-16 pb-10 flex items-end justify-between">
       <router-link to="/" class="group leading-none">
         <span class="block font-display text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100 transition-colors duration-500">
           Karrl
@@ -33,11 +33,11 @@
       </div>
     </header>
 
-    <main class="flex-grow w-full max-w-3xl mx-auto px-6 pb-32">
+    <main class="flex-grow w-full max-w-5xl mx-auto px-6 pb-32">
       <router-view></router-view>
     </main>
 
-    <footer class="w-full max-w-3xl mx-auto px-6 pb-10 relative">
+    <footer class="w-full max-w-5xl mx-auto px-6 pb-10 relative">
       <!-- Decorative line image -->
       <img :src="DECO_LINE" alt="" class="w-48 h-3 mx-auto mb-6 opacity-40 dark:opacity-30 pointer-events-none" aria-hidden="true" />
       <div class="border-t border-stone-200 dark:border-stone-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400 dark:text-stone-600 tracking-wide">
