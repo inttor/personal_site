@@ -1,32 +1,32 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-zinc-50">
+  <div class="min-h-screen flex items-center justify-center bg-stone-50 dark:bg-stone-950 transition-colors duration-500">
     <div class="w-full max-w-sm mx-auto">
-      <div class="bg-white rounded-2xl shadow-sm border border-zinc-100 p-8">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl shadow-sm border border-stone-200 dark:border-stone-800 p-8 transition-colors duration-500">
         <div class="text-center mb-8">
-          <h1 class="text-2xl font-bold text-zinc-900">Admin</h1>
-          <p class="text-sm text-zinc-500 mt-1">Sign in to manage articles</p>
+          <h1 class="font-display text-2xl font-bold text-stone-900 dark:text-stone-100 mb-1">Admin</h1>
+          <p class="text-sm text-stone-400">Sign in to manage articles</p>
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-5">
           <div>
-            <label class="block text-sm font-medium text-zinc-700 mb-1.5">Username</label>
+            <label class="block text-sm font-medium text-stone-600 dark:text-stone-300 mb-1.5">Username</label>
             <input
               v-model="username"
               type="text"
               required
               autocomplete="username"
-              class="w-full px-4 py-2.5 border border-zinc-200 rounded-lg focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 outline-none transition-all text-sm"
+              class="w-full px-4 py-2.5 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 dark:focus:border-amber-500 outline-none transition-all duration-300 text-sm text-stone-900 dark:text-stone-100 placeholder:text-stone-400"
               placeholder="Enter username"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-zinc-700 mb-1.5">Password</label>
+            <label class="block text-sm font-medium text-stone-600 dark:text-stone-300 mb-1.5">Password</label>
             <input
               v-model="password"
               type="password"
               required
               autocomplete="current-password"
-              class="w-full px-4 py-2.5 border border-zinc-200 rounded-lg focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 outline-none transition-all text-sm"
+              class="w-full px-4 py-2.5 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 rounded-lg focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 dark:focus:border-amber-500 outline-none transition-all duration-300 text-sm text-stone-900 dark:text-stone-100 placeholder:text-stone-400"
               placeholder="Enter password"
             />
           </div>
@@ -36,12 +36,16 @@
           <button
             type="submit"
             :disabled="loading"
-            class="w-full py-2.5 bg-zinc-900 text-white rounded-lg hover:bg-zinc-800 disabled:opacity-50 transition-colors text-sm font-medium"
+            class="w-full py-2.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg disabled:opacity-50 transition-colors duration-500 text-sm font-medium"
           >
             {{ loading ? 'Signing in...' : 'Sign in' }}
           </button>
         </form>
       </div>
+
+      <p class="text-center text-xs text-stone-400 mt-6">
+        <router-link to="/" class="hover:text-stone-600 dark:hover:text-stone-400 transition-colors duration-500">&larr; Back to site</router-link>
+      </p>
     </div>
   </div>
 </template>

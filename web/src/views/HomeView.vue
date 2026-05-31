@@ -1,99 +1,132 @@
 <template>
   <div class="animate-fade-in-up">
-    <!-- Profile Hero Section: High-end minimalism -->
-    <div class="mb-20 flex flex-col md:flex-row items-center md:items-start gap-10">
-      <img src="\src\img\accountPicture.jpg" alt="Avatar" class="w-24 h-24 rounded-full grayscale hover:grayscale-0 transition duration-500 ease-in-out" />
-      <div class="text-center md:text-left pt-2">
-        <h1 class="text-3xl font-bold mb-2 text-zinc-900 tracking-tight">Karrl</h1>
-        <p class="text-zinc-500 font-mono text-sm mb-4">
-          > STDIN | Think >> /dev/Mind
-        </p>
-        <p class="text-zinc-600 leading-relaxed max-w-xl text-base">
-          竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
-        </p>
+    <!-- Hero / Profile -->
+    <section class="relative mb-12">
+      <!-- Ambient background orbs -->
+      <div class="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-amber-100/30 dark:bg-amber-900/10 blur-3xl -z-10 pointer-events-none"></div>
+      <div class="absolute -top-16 -left-24 w-72 h-72 rounded-full bg-stone-200/40 dark:bg-stone-800/20 blur-3xl -z-10 pointer-events-none"></div>
+
+      <!-- Hero background image (subtle overlay) -->
+      <div class="absolute inset-0 -z-20 pointer-events-none opacity-[0.04] dark:opacity-[0.03] rounded-2xl overflow-hidden">
+        <img :src="HERO_BG" alt="" class="w-full h-full object-cover grayscale" loading="lazy" />
       </div>
-    </div>
 
-    <!-- Main Content with Sidebar -->
-    <div class="flex flex-col md:flex-row gap-12">
-      <!-- Sidebar Navigation (Tags & Dates) -->
-      <aside class="md:w-48 shrink-0">
-        <div class="sticky top-12 space-y-10">
-          
-          <!-- Filter by Year -->
-          <div v-if="uniqueYears.length">
-            <h4 class="text-[11px] font-mono tracking-wider uppercase text-zinc-400 mb-4 select-none">Archives</h4>
-            <ul class="space-y-2 text-sm font-light">
-              <li 
-                class="cursor-pointer transition-colors duration-300 flex items-center gap-2"
-                :class="selectedYear === '' ? 'text-zinc-900 font-medium' : 'text-zinc-500 hover:text-zinc-800'"
-                @click="selectedYear = ''; selectedTag = ''"
-              >
-                All
-              </li>
-              <li 
-                v-for="year in uniqueYears" :key="year"
-                class="cursor-pointer transition-colors duration-300 flex items-center gap-2"
-                :class="selectedYear === year ? 'text-zinc-900 font-medium' : 'text-zinc-500 hover:text-zinc-800'"
-                @click="toggleYear(year)"
-              >
-                {{ year }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Filter by Tags -->
-          <div v-if="uniqueTags.length">
-            <h4 class="text-[11px] font-mono tracking-wider uppercase text-zinc-400 mb-4 select-none">Tags</h4>
-            <div class="flex flex-wrap gap-2">
-              <span 
-                v-for="tag in uniqueTags" :key="tag"
-                @click="toggleTag(tag)"
-                class="text-xs cursor-pointer px-2.5 py-1 rounded-md transition-all duration-300"
-                :class="selectedTag === tag ? 'bg-zinc-800 text-white' : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200 hover:text-zinc-800'"
-              >
-                #{{ tag }}
-              </span>
-            </div>
-          </div>
-          
-        </div>
-      </aside>
-
-      <!-- Article List -->
-      <div class="flex-1 min-w-0">
-        <div v-if="loading" class="text-zinc-400 animate-pulse">Loading insights...</div>
-        <div v-else-if="error" class="text-red-400">{{ error }}</div>
-        
-        <div v-else class="space-y-2">
-          <div v-if="filteredArticles.length === 0" class="text-zinc-400 font-light py-8">
-            No articles found for this filter.
-          </div>
-          
-          <div v-for="article in filteredArticles" :key="article.id" 
-               class="group cursor-pointer flex flex-col md:flex-row md:items-baseline justify-between py-5 border-b border-zinc-100 last:border-0 hover:bg-zinc-50/50 -mx-6 px-6 rounded-xl transition duration-300"
-               @click="$router.push({ name: 'article', params: { id: article.id } })">
-            
-            <h3 class="text-lg text-zinc-800 group-hover:text-zinc-900 font-medium transition-colors duration-300 line-clamp-2 md:line-clamp-1">
-              {{ article.title }}
-            </h3>
-            
-            <div class="text-sm text-zinc-400 flex items-center gap-6 shrink-0 mt-1 md:mt-0 font-light tracking-wide">
-              <span v-if="article.category?.name || article.category_name">
-                {{ article.category?.name || article.category_name }}
-              </span>
-              <time>{{ new Date(article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time>
-            </div>
-          </div>
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-6">
+        <img
+          src="/img/accountPicture.jpg"
+          alt="Karrl"
+          class="w-20 h-20 rounded-full grayscale hover:grayscale-0 transition-all duration-700 ease-out ring-1 ring-stone-200 dark:ring-stone-800 hover:ring-amber-300/60 dark:hover:ring-amber-600/40"
+        />
+        <div class="text-center md:text-left pt-1">
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight mb-3">
+            Karrl
+          </h1>
+          <p class="text-stone-500 dark:text-stone-400 font-mono text-xs tracking-widest uppercase">
+            Words and code, thoughts and craft
+          </p>
         </div>
       </div>
-    </div>
+      <p class="text-stone-500 dark:text-stone-400 leading-relaxed max-w-xl text-base italic font-display">
+        竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
+      </p>
+    </section>
+
+    <div class="divider"><span>&sect;</span></div>
+
+    <!-- Filters + Article List -->
+    <section>
+      <div class="flex flex-col md:flex-row gap-16">
+        <!-- Sidebar -->
+        <aside class="md:w-44 shrink-0">
+          <div class="sticky top-16 space-y-10">
+            <div v-if="uniqueYears.length">
+              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-5 select-none">
+                By Year
+              </h4>
+              <ul class="space-y-2.5 text-sm">
+                <li
+                  class="cursor-pointer transition-all duration-500 flex items-center gap-2"
+                  :class="selectedYear === '' ? 'text-amber-700 dark:text-amber-500 font-medium' : 'text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300'"
+                  @click="selectedYear = ''; selectedTag = ''"
+                >
+                  All
+                </li>
+                <li
+                  v-for="year in uniqueYears" :key="year"
+                  class="cursor-pointer transition-all duration-500 flex items-center gap-2"
+                  :class="selectedYear === year ? 'text-amber-700 dark:text-amber-500 font-medium' : 'text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300'"
+                  @click="toggleYear(year)"
+                >
+                  {{ year }}
+                </li>
+              </ul>
+            </div>
+
+            <div v-if="uniqueTags.length">
+              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-5 select-none">
+                Topics
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  v-for="tag in uniqueTags" :key="tag"
+                  @click="toggleTag(tag)"
+                  class="text-xs cursor-pointer px-3 py-1 rounded-full transition-all duration-500"
+                  :class="selectedTag === tag ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400' : 'bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 hover:text-stone-700 dark:hover:text-stone-300'"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Articles -->
+        <div class="flex-1 min-w-0">
+          <!-- Loading -->
+          <div v-if="loading" class="space-y-0">
+            <div v-for="i in 5" :key="i" class="flex flex-col md:flex-row md:items-baseline justify-between py-6 border-b border-stone-100 dark:border-stone-800 last:border-0">
+              <div class="skeleton h-6 w-72 rounded mb-2 md:mb-0"></div>
+              <div class="flex items-center gap-6">
+                <div class="skeleton h-4 w-14 rounded"></div>
+                <div class="skeleton h-4 w-24 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <div v-else-if="error" class="text-red-500 dark:text-red-400 py-12 text-sm">{{ error }}</div>
+
+          <div v-else class="space-y-0">
+            <p v-if="filteredArticles.length === 0" class="text-stone-400 dark:text-stone-500 py-12 text-sm">
+              No articles found.
+            </p>
+
+            <article
+              v-for="article in filteredArticles" :key="article.id"
+              class="group cursor-pointer flex flex-col md:flex-row md:items-baseline justify-between py-6 border-b border-stone-100 dark:border-stone-800 last:border-0 hover:bg-stone-50/60 dark:hover:bg-stone-900/30 -mx-4 px-4 rounded-lg transition-all duration-500"
+              @click="$router.push({ name: 'article', params: { id: article.id } })"
+            >
+              <h3 class="text-lg text-stone-800 dark:text-stone-200 group-hover:text-amber-700 dark:group-hover:text-amber-500 font-medium transition-colors duration-500 line-clamp-2 md:line-clamp-1 font-display">
+                {{ article.title }}
+              </h3>
+
+              <div class="text-xs text-stone-400 dark:text-stone-500 flex items-center gap-5 shrink-0 mt-1.5 md:mt-0 tracking-wide">
+                <span v-if="article.category?.name || article.category_name" class="text-stone-500 dark:text-stone-400">
+                  {{ article.category?.name || article.category_name }}
+                </span>
+                <time>{{ new Date(article.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import api from '@/api'
+import { HERO_BG } from '@/config/images.js'
 
 const articles = ref([])
 const loading = ref(true)
@@ -102,7 +135,6 @@ const error = ref(null)
 const selectedTag = ref('')
 const selectedYear = ref('')
 
-// Compute unique years from articles
 const uniqueYears = computed(() => {
   const years = new Set()
   articles.value.forEach(article => {
@@ -113,7 +145,6 @@ const uniqueYears = computed(() => {
   return Array.from(years).sort((a, b) => b - a)
 })
 
-// Compute unique tags from articles
 const uniqueTags = computed(() => {
   const tags = new Set()
   articles.value.forEach(article => {
@@ -124,27 +155,20 @@ const uniqueTags = computed(() => {
   return Array.from(tags).sort()
 })
 
-// Filter actions
 const toggleTag = (tag) => {
   selectedTag.value = selectedTag.value === tag ? '' : tag
-  // Keep year filter active, or optionally reset it:
-  // selectedYear.value = ''
 }
 
 const toggleYear = (year) => {
   selectedYear.value = selectedYear.value === year ? '' : year
-  // Keep tag filter active, or optionally reset it:
   selectedTag.value = ''
 }
 
-// Filtered articles list
 const filteredArticles = computed(() => {
   return articles.value.filter(article => {
-    // Tag filter
     if (selectedTag.value && (!article.tags || !article.tags.includes(selectedTag.value))) {
       return false
     }
-    // Year filter logic
     if (selectedYear.value && new Date(article.created_at).getFullYear() !== selectedYear.value) {
       return false
     }

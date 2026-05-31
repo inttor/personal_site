@@ -1,7 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-50 text-gray-900;
+@layer base {
+  body {
+    @apply bg-stone-50 text-stone-800 antialiased;
+  }
+
+  .dark body,
+  body.dark {
+    @apply bg-stone-950 text-stone-300;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-amber-200/60 text-stone-900;
+  }
+
+  .dark ::selection {
+    @apply bg-amber-800/40 text-amber-100;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-amber-600 rounded-sm;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-300 rounded-full;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-stone-700;
+  }
+}
+
+@layer components {
+  .skeleton {
+    @apply bg-stone-200 rounded animate-shimmer;
+    background-image: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+    background-size: 200% 100%;
+  }
+
+  .dark .skeleton {
+    @apply bg-stone-800;
+    background-image: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+    background-size: 200% 100%;
+  }
+
+  /* Subtle grain overlay */
+  .grain-overlay::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  .dark .grain-overlay::after {
+    opacity: 0.06;
+  }
+
+  /* Editorial drop cap */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4.8em;
+    font-weight: 700;
+    line-height: 0.65;
+    padding-right: 0.18em;
+    padding-bottom: 0.04em;
+    margin-top: -0.04em;
+    margin-right: 0.08em;
+    @apply text-stone-900 dark:text-stone-100;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    @apply font-display italic text-2xl leading-relaxed text-stone-600 dark:text-stone-400 border-l-2 border-amber-400/60 pl-8 py-2 my-12 max-w-lg;
+  }
+
+  /* Premium divider */
+  .divider {
+    @apply flex items-center gap-4 my-10;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    @apply flex-1 h-px bg-stone-200 dark:bg-stone-800;
+  }
+
+  .divider span {
+    @apply text-amber-600/60 dark:text-amber-500/60 text-xs tracking-widest uppercase font-mono;
+  }
 }

@@ -54,6 +54,7 @@ func (r *ArticleRepository) Update(article *model.Article) error {
 		"title":       article.Title,
 		"summary":     article.Summary,
 		"content":     article.Content,
+		"cover_url":   article.CoverURL,
 		"category_id": article.CategoryID,
 	}).Error
 }

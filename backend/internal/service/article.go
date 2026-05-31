@@ -70,6 +70,7 @@ func (s *ArticleService) GetByID(id uint) (*model.ArticleDetailResp, error) {
 		Title:        article.Title,
 		Summary:      article.Summary,
 		Content:      article.Content,
+		CoverURL:     article.CoverURL,
 		CategoryID:   article.CategoryID,
 		CategoryName: article.Category.Name,
 		ViewCount:    article.ViewCount + 1,
@@ -86,6 +87,7 @@ type CreateArticleReq struct {
 	Title      string `json:"title" binding:"required"`
 	Summary    string `json:"summary"`
 	Content    string `json:"content" binding:"required"`
+	CoverURL   string `json:"cover_url"`
 	CategoryID uint   `json:"category_id" binding:"required"`
 	TagIDs     []uint `json:"tag_ids"`
 }
@@ -97,6 +99,7 @@ func (s *ArticleService) Create(req *CreateArticleReq, userID uint) (*model.Arti
 		Title:      req.Title,
 		Summary:    req.Summary,
 		Content:    req.Content,
+		CoverURL:   req.CoverURL,
 	}
 
 	if err := s.articleRepo.Create(article); err != nil {
@@ -116,6 +119,7 @@ type UpdateArticleReq struct {
 	Title      string `json:"title" binding:"required"`
 	Summary    string `json:"summary"`
 	Content    string `json:"content" binding:"required"`
+	CoverURL   string `json:"cover_url"`
 	CategoryID uint   `json:"category_id" binding:"required"`
 	TagIDs     []uint `json:"tag_ids"`
 }
@@ -129,6 +133,7 @@ func (s *ArticleService) Update(id uint, req *UpdateArticleReq) error {
 	article.Title = req.Title
 	article.Summary = req.Summary
 	article.Content = req.Content
+	article.CoverURL = req.CoverURL
 	article.CategoryID = req.CategoryID
 
 	if err := s.articleRepo.Update(article); err != nil {

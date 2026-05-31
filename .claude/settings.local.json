@@ -6,7 +6,15 @@
       "Bash(docker --version)",
       "Bash(go mod *)",
       "Bash(go build *)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(python3 *)",
+      "Bash(python __TRACKED_VAR__/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.5.0/src/ui-ux-pro-max/scripts/search.py --help)",
+      "Bash(npm run *)",
+      "Bash(python *)",
+      "Bash(npm *)",
+      "WebFetch(domain:stockcake.com)",
+      "WebFetch(domain:pixabay.com)",
+      "Bash(curl -sI \"https://picsum.photos/1200/600\")"
     ]
   }
 }

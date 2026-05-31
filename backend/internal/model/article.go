@@ -13,6 +13,7 @@ type Article struct {
 	Title      string         `gorm:"size:255;not null" json:"title"`
 	Summary    string         `gorm:"size:512" json:"summary"`
 	Content    string         `gorm:"type:longtext;not null" json:"content"`
+	CoverURL   string         `gorm:"size:512" json:"cover_url"`
 	ViewCount  uint           `gorm:"default:0" json:"view_count"`
 	CreatedAt  time.Time      `gorm:"precision:3" json:"created_at"`
 	UpdatedAt  time.Time      `gorm:"precision:3" json:"updated_at"`
@@ -40,6 +41,7 @@ type ArticleDetailResp struct {
 	Title        string    `json:"title"`
 	Summary      string    `json:"summary"`
 	Content      string    `json:"content"`
+	CoverURL     string    `json:"cover_url"`
 	CategoryID   uint      `json:"category_id"`
 	CategoryName string    `json:"category_name"`
 	Tags         []string  `json:"tags"`
