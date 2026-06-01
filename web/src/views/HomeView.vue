@@ -35,46 +35,48 @@
 
     <!-- Filters + Article List -->
     <section>
-      <div class="flex flex-col md:flex-row gap-16">
-        <!-- Sidebar -->
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+        <!-- Filters -->
         <aside class="md:w-44 shrink-0">
-          <div class="sticky top-16 space-y-10">
-            <div v-if="uniqueYears.length">
-              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-5 select-none">
+          <div class="md:sticky md:top-16">
+            <!-- Year filter -->
+            <div v-if="uniqueYears.length" class="mb-6 md:mb-10">
+              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-3 md:mb-5 select-none">
                 By Year
               </h4>
-              <ul class="space-y-2.5 text-sm">
-                <li
-                  class="cursor-pointer transition-all duration-500 flex items-center gap-2"
-                  :class="selectedYear === '' ? 'text-amber-700 dark:text-amber-500 font-medium' : 'text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300'"
+              <div class="flex flex-row flex-wrap gap-1.5 md:flex-col md:gap-0">
+                <button
+                  class="text-sm cursor-pointer px-3 py-1 md:py-0 md:px-0 rounded-full md:rounded-none transition-all duration-500 md:flex md:items-center md:gap-2 md:w-full md:py-2.5"
+                  :class="selectedYear === '' ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 md:bg-transparent md:dark:bg-transparent md:text-amber-700 md:dark:text-amber-500 font-medium' : 'bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 md:bg-transparent md:dark:bg-transparent md:hover:text-stone-700 md:dark:hover:text-stone-300'"
                   @click="selectedYear = ''; selectedTag = ''"
                 >
                   All
-                </li>
-                <li
+                </button>
+                <button
                   v-for="year in uniqueYears" :key="year"
-                  class="cursor-pointer transition-all duration-500 flex items-center gap-2"
-                  :class="selectedYear === year ? 'text-amber-700 dark:text-amber-500 font-medium' : 'text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300'"
+                  class="text-sm cursor-pointer px-3 py-1 md:py-0 md:px-0 rounded-full md:rounded-none transition-all duration-500 md:flex md:items-center md:gap-2 md:w-full md:py-2.5"
+                  :class="selectedYear === year ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 md:bg-transparent md:dark:bg-transparent md:text-amber-700 md:dark:text-amber-500 font-medium' : 'bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 md:bg-transparent md:dark:bg-transparent md:hover:text-stone-700 md:dark:hover:text-stone-300'"
                   @click="toggleYear(year)"
                 >
                   {{ year }}
-                </li>
-              </ul>
+                </button>
+              </div>
             </div>
 
+            <!-- Topic filter -->
             <div v-if="uniqueTags.length">
-              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-5 select-none">
+              <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-3 md:mb-5 select-none">
                 Topics
               </h4>
-              <div class="flex flex-wrap gap-2">
-                <span
+              <div class="flex flex-wrap gap-1.5">
+                <button
                   v-for="tag in uniqueTags" :key="tag"
                   @click="toggleTag(tag)"
                   class="text-xs cursor-pointer px-3 py-1 rounded-full transition-all duration-500"
-                  :class="selectedTag === tag ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400' : 'bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 hover:text-stone-700 dark:hover:text-stone-300'"
+                  :class="selectedTag === tag ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 ring-1 ring-amber-300/60 dark:ring-amber-600/30' : 'bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700 hover:text-stone-700 dark:hover:text-stone-300'"
                 >
                   {{ tag }}
-                </span>
+                </button>
               </div>
             </div>
           </div>
