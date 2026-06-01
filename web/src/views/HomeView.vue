@@ -64,7 +64,7 @@
             </div>
 
             <!-- Topic filter -->
-            <div v-if="uniqueTags.length">
+            <div v-if="uniqueTags.length" class="hidden md:block">
               <h4 class="text-[10px] font-mono tracking-[0.2em] uppercase text-stone-400 dark:text-stone-500 mb-3 md:mb-5 select-none">
                 Topics
               </h4>
